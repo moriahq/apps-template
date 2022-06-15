@@ -1,0 +1,15 @@
+app:
+  id: {{appId}}
+modules:
+  itemPanel:
+    - key: item-panel-key
+      route: /item-panel
+      title: 标题
+      resource: main
+      loadType: Uikit
+  function:
+    - key: panel-key
+      handler: index.render
+resources:
+  - key: main
+    path: /static/micro/dist
