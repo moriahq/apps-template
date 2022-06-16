@@ -1,0 +1,25 @@
+app:
+  id: {{appId}}
+modules:
+  itemPanel:
+    - key: item-panel-key
+      route: /item-panel
+      title: 标题
+      resource: main
+      loadType: micro
+  webtrigger:
+    - key: item-webtrigger
+      function: webtrigger-key
+  trigger:
+    - key: item-trigger
+      function: trigger-key
+      events:
+        - proxima:app:install
+  function:
+    - key: webtrigger-key
+      handler: index.runWebtrigger
+    - key: trigger-key
+      handler: index.runTrigger
+resources:
+  - key: main
+    path: /static/micro/dist
