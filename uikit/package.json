@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nebulare/api": "^0.1.0",
+    "@nebulare/api": "^0.1.2",
     "@nebulare/ui": "^0.1.3"
   },
   "devDependencies": {

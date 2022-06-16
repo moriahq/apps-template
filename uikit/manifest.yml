@@ -1,0 +1,23 @@
+app:
+  id: {{appId}}
+modules:
+  itemPanel:
+    - key: item-panel-key
+      title: 标题
+      function: panel-key
+      loadType: uikit
+  webtrigger:
+    - key: item-webtrigger
+      function: webtrigger-key
+  trigger:
+    - key: item-trigger
+      function: trigger-key
+      events:
+        - proxima:app:install
+  function:
+    - key: panel-key
+      handler: index.render
+    - key: webtrigger-key
+      handler: index.runWebtrigger
+    - key: trigger-key
+      handler: index.runTrigger
