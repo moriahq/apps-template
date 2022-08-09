@@ -1,4 +1,4 @@
-import NebulaUI, { renderApp, useState, Button, Text, Tabs, TabPane } from '@nebulare/ui';
+import NebulaUI, { renderApp, useState, Button, Text, Tabs, TabPane } from '@giteeteam/apps-ui';
 
 const useCount = () => {
   const [count, setCount] = useState(0);
