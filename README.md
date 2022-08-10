@@ -1,4 +1,4 @@
-# Nebula App Template
-Nebula应用模板，有以下模板：
+# App Template
+应用模板，有以下类型模板：
 - uikit
 - micro

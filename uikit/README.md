@@ -1,12 +1,12 @@
-# Nebula App Template
+# App Template
 ### 首次开发
 将 `{{projectName}}` 修改为所需。
 ### 开发
-`nebula dev`
+`yarn dev`
 
 ### 构建
-`nebula build`
+`yarn build`
 
 ### 插件部署
-`nebula deploy`
+`yarn deploy`
 
