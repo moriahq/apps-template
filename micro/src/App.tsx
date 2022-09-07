@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, useMemo } from 'react';
 import { MemoryRouter, Switch, Route, useHistory } from 'react-router-dom';
-import { ConfigProvider, message } from 'antd';
+import { ConfigProvider, message } from '@osui/ui';
 import { PluginSDKContext } from '@projectproxima/plugin-sdk';
 
 const rootElement = '{{projectName}}';

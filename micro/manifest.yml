@@ -1,25 +1,43 @@
 app:
-  id: {{appId}}
+  uuid: {{uuid}}
+  name: {{projectName}}
 modules:
-  itemPanel:
-    - key: item-panel-key
-      route: /item-panel
-      title: 标题
+  adminPage:
+    - key: micro-adminPage-1
       resource: main
-      loadType: micro
-  webtrigger:
-    - key: item-webtrigger
-      function: webtrigger-key
-  trigger:
-    - key: item-trigger
-      function: trigger-key
-      events:
-        - proxima:app:install
-  function:
-    - key: webtrigger-key
-      handler: index.runWebtrigger
-    - key: trigger-key
-      handler: index.runTrigger
+      title: 微应用test
+      loadType: Micro
+  # itemPanel:
+  #   - key: micro-itemPanel-1
+  #     resource: main
+  #     title: 卡片面板微应用
+  #     loadType: Micro
+  #     route: /demo1
+  # itemActivity:
+  #   - key: micro-itemActivity-1
+  #     resource: main
+  #     title: 卡片活动微应用
+  #     loadType: Micro
+  #     route: /demo2
+  # adminPage:
+  #   - key: micro-adminPage-1
+  #     resource: main
+  #     title: 管理微前端
+  #     loadType: Micro
+  #     route: /demo3
+  # appPage:
+  #   - key: micro-appPage-1
+  #     resource: main
+  #     title: 应用微前端
+  #     loadType: Micro
+  #     route: /demo4
+  # workspacePage:
+  #   - key: micro-workspacePage-1
+  #     resource: main
+  #     title: 空间微前端
+  #     loadType: Micro
+  #     route: /demo5
+
 resources:
   - key: main
-    path: /static/micro/dist
+    path: ./dist/

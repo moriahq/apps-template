@@ -1,4 +1,4 @@
-# App Template
+# OSUI webpack config demo
 ### 首次开发
 将 `{{projectName}}` 修改为所需。
 ### 开发

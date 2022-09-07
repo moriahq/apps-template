@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Rate } from 'antd';
+import { Input, Rate } from '@osui/ui';
 import Error from '@/statics/error.png';
 import Logo from '@/statics/Gitee-Scan.svg';
 import cx from './Demo.less';
