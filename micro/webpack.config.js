@@ -12,7 +12,7 @@ const WebpackBar = require('webpackbar');
 const smp = new SpeedMeasurePlugin();
 
 const distOutputPath = 'dist';
-const appPerfix = '{{projectName}}';
+const appPerfix = '{{appName}}';
 
 // output配置
 const outputConfig = isProd =>
@@ -179,7 +179,6 @@ module.exports = (cliEnv = {}, argv) => {
           include: [
             path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'node_modules/antd/'),
-            path.resolve(__dirname, 'node_modules/@osui'),
             path.resolve(__dirname, 'node_modules/github-markdown-css'),
           ],
           use: [classNamesConfig, extractOrStyleLoaderConfig, 'css-loader', postcssLoaderConfig],
@@ -192,13 +191,6 @@ module.exports = (cliEnv = {}, argv) => {
             cssLoaderConfig,
             postcssLoaderConfig,
             lessLoaderConfig,
-            makeStyleResourcesLoader([
-              path.resolve(__dirname, 'node_modules/@osui/theme/dist/antd-vars-patch.less'),
-              path.resolve(
-                __dirname,
-                'node_modules/@osui/theme/dist/less-functions-overrides.less',
-              ),
-            ]),
           ],
         },
         // 静态资源

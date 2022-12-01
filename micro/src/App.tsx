@@ -1,9 +1,9 @@
 import React, { useEffect, Suspense, useMemo } from 'react';
 import { MemoryRouter, Switch, Route, useHistory } from 'react-router-dom';
-import { ConfigProvider, message } from '@osui/ui';
+import { ConfigProvider, message } from 'antd';
 import { PluginSDKContext } from '@projectproxima/plugin-sdk';
 
-const rootElement = '{{projectName}}';
+const rootElement = '{{appName}}';
 
 message.config({
   getContainer: () =>

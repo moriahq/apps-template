@@ -1,5 +1,5 @@
 {
-  "name": "{{projectName}}",
+  "name": "{{appName}}",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -7,7 +7,8 @@
     "build": "webpack --mode=production",
     "dev": "yarn start",
     "start": "webpack server --mode=development",
-    "build-app": "sh ./build-app.sh",
+    "build-package": "giteeteam-apps build -o build",
+    "build-app": "yarn build && yarn build-package",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
   },
   "repository": {
@@ -21,6 +22,7 @@
     "@babel/preset-react": "^7.14.5",
     "@ecomfe/class-names-loader": "^2.0.0",
     "@ecomfe/eslint-config": "^7.3.0",
+    "@giteeteam/apps-cli": "^0.2.11",
     "@svgr/webpack": "^5.5.0",
     "@types/eslint": "^7.28.0",
     "@types/react": "^17.0.20",
@@ -64,9 +66,6 @@
     "webpackbar": "^5.0.0-3"
   },
   "dependencies": {
-    "@osui/icons": "^1.1.1",
-    "@osui/theme": "^1.1.2",
-    "@osui/ui": "^1.1.6",
     "@projectproxima/plugin-sdk": "^0.1.7",
     "antd": "^4.16.13",
     "axios": "^0.21.4",

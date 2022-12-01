@@ -1,5 +1,7 @@
 app:
-  name: {{projectName}}
+  name: {{appName}}
+  key: {{appKey}}
+  version: '0.0.1'
 modules:
   adminPage:
     - key: micro-adminPage-1

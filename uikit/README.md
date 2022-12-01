@@ -1,6 +1,6 @@
 # App Template
 ### 首次开发
-将 `{{projectName}}` 修改为所需。
+将 `{{appName}}` 修改为所需。
 ### 开发
 `yarn dev`
 

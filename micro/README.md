@@ -1,12 +1,11 @@
 # OSUI webpack config demo
-### 首次开发
-将 `{{projectName}}` 修改为所需。
-### 开发
+
+### Dev
 `yarn dev`
 
-### 构建
+### Build
 `yarn build`
 
-### 插件打包
+### Build app
 `yarn build-app`
 
