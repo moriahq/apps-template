@@ -17,14 +17,14 @@ const outputConfig = isProd =>
         filename: 'js/[name].[chunkhash].min.js',
         path: path.resolve(__dirname, distOutputPath),
         publicPath: './',
-        library: appPerfix,
+        library: appKey,
         libraryTarget: 'umd',
       }
     : {
         filename: 'main.js',
         path: path.resolve(__dirname, distOutputPath),
         publicPath: '/',
-        library: appPerfix,
+        library: appKey,
         libraryTarget: 'umd',
       };
 
