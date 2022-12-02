@@ -1,18 +1,14 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const LessPluginFunctions = require('less-plugin-functions');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const webpack = require('webpack');
 const hasha = require('hasha');
-const autoprefixer = require('autoprefixer');
-const namespacePefixer = require('postcss-selector-namespace');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const WebpackBar = require('webpackbar');
-
-const smp = new SpeedMeasurePlugin();
+const autoprefixer = require('autoprefixer');
 
 const distOutputPath = 'dist';
-const appPerfix = '{{appName}}';
+const appKey = '{{appKey}}';
 
 // output配置
 const outputConfig = isProd =>
@@ -32,27 +28,20 @@ const outputConfig = isProd =>
         libraryTarget: 'umd',
       };
 
-const getLocalIdent = ({ resourcePath }, localIdentName, localName) => {
-  if (localName === appPerfix) {
-    return localName;
-  }
-  if (/\.global\.(css|less)$/.test(resourcePath) || /node_modules/.test(resourcePath)) {
-    // 不做cssModule 处理的
-    return localName;
-  }
-  return `${localName}__${hasha(resourcePath + localName, { algorithm: 'md5' }).slice(0, 8)}`;
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-module.exports = (cliEnv = {}, argv) => {
+module.exports = (_client, argv) => {
   const mode = argv.mode;
-
-  if (!['production', 'development'].includes(mode)) {
-    throw new Error('The mode is required for NODE_ENV, BABEL_ENV but was not specified.');
-  }
-
   const isProd = mode === 'production';
-  const isDev = mode === 'development';
+
+  const getLocalIdent = ({ resourcePath }, localIdentName, localName) => {
+    if (localName === appKey) {
+      return localName;
+    }
+    if (/\.global\.(css|less)$/.test(resourcePath) || /node_modules/.test(resourcePath)) {
+      // 不做cssModule 处理的
+      return localName;
+    }
+    return `${localName}__${hasha(resourcePath + localName, { algorithm: 'md5' }).slice(0, 8)}`;
+  };
 
   const classNamesConfig = {
     loader: '@ecomfe/class-names-loader',
@@ -63,24 +52,11 @@ module.exports = (cliEnv = {}, argv) => {
   // 生产环境使用 MiniCssExtractPlugin
   const extractOrStyleLoaderConfig = isProd ? MiniCssExtractPlugin.loader : 'style-loader';
 
-  // 根据 patterns 使用 style-resources-loader
-  const makeStyleResourcesLoader = patterns => ({
-    loader: 'style-resources-loader',
+  const postcssLoaderConfig = {
+    loader: 'postcss-loader',
     options: {
-      patterns,
-      injector: 'append',
-    },
-  });
-
-  const lessLoaderConfig = {
-    loader: 'less-loader',
-    options: {
-      lessOptions: {
-        javascriptEnabled: true,
-        modifyVars: {
-          'ant-prefix': 'ant',
-        },
-        plugins: [new LessPluginFunctions({ alwaysOverride: true })],
+      postcssOptions: {
+        plugins: [autoprefixer],
       },
     },
   };
@@ -93,61 +69,62 @@ module.exports = (cliEnv = {}, argv) => {
     },
   };
 
-  const postcssLoaderConfig = {
-    loader: 'postcss-loader',
+  const lessLoaderConfig = {
+    loader: 'less-loader',
     options: {
-      postcssOptions: {
-        plugins: [
-          namespacePefixer({
-            namespace: `#${appPerfix}`,
-          }),
-          autoprefixer,
-        ],
+      lessOptions: {
+        javascriptEnabled: true,
+        modifyVars: {
+          'ant-prefix': appKey,
+          '@primary-color': '#0C62FF',
+        },
       },
     },
   };
+
   const webpackConfig = {
+    mode,
     entry: './src/index.tsx',
-    mode: isProd ? 'production' : 'development',
     output: outputConfig(isProd),
-    devtool: (() => {
-      if (isDev) {
-        return 'inline-cheap-module-source-map';
-      }
-      return false;
-    })(),
+    devtool: isProd ? false : 'source-map',
     resolve: {
-      extensions: ['.js', '.css', '.jsx', '.tsx', '.ts'],
+      extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.less'],
       alias: {
-        '@': path.resolve(__dirname, 'src/'),
-        react: path.resolve(__dirname, './node_modules/react'),
-        'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+        '@': path.join(__dirname, 'src/'),
       },
     },
     devServer: {
-      hot: 'only',
-      // hot: true, // 由于微前端热重载不支持局部更新，开启本项可使用全量刷新
-      static: {
-        directory: path.resolve(__dirname, '../dist'),
-        serveIndex: true,
-        watch: true,
-      },
-      historyApiFallback: {
-        disableDotRule: true,
-        index: '/',
-      },
+      port: 8000,
+      hot: true,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': '*',
         'Access-Control-Allow-Methods': '*',
       },
     },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+          terserOptions: {
+            format: {
+              comments: false,
+            },
+          },
+        }),
+      ],
+    },
     plugins: [
-      new WebpackBar(),
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(process.env),
+        'process.env.appKey': JSON.stringify(appKey),
+      }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'public/index.html'),
         filename: 'index.html',
         inject: true,
+        appKey,
       }),
       isProd &&
         new MiniCssExtractPlugin({
@@ -160,27 +137,20 @@ module.exports = (cliEnv = {}, argv) => {
       rules: [
         {
           test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
-        },
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-              plugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
+              },
             },
-          },
+            'ts-loader',
+          ],
+          exclude: /node_modules/,
         },
         {
-          test: /\.css/,
-          include: [
-            path.resolve(__dirname, 'src'),
-            path.resolve(__dirname, 'node_modules/antd/'),
-            path.resolve(__dirname, 'node_modules/github-markdown-css'),
-          ],
+          test: /\.css$/,
           use: [classNamesConfig, extractOrStyleLoaderConfig, 'css-loader', postcssLoaderConfig],
         },
         {
@@ -193,20 +163,21 @@ module.exports = (cliEnv = {}, argv) => {
             lessLoaderConfig,
           ],
         },
-        // 静态资源
         {
-          test: /\.(png|jpg|gif)$/i,
-          type: 'asset/resource',
-          generator: {
-            filename: 'resource/[hash][ext][query]',
-          },
-        },
-        {
-          test: /\.svg$/,
-          use: ['@svgr/webpack'],
+          test: /\.(png|jpg|gif|svg)$/i,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                name: '[name]_[hash].[ext]',
+                limit: 100 * 24,
+              },
+            },
+          ],
         },
       ],
     },
   };
-  return isProd ? webpackConfig : smp.wrap(webpackConfig);
+
+  return webpackConfig;
 };

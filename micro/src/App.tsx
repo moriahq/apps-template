@@ -3,7 +3,7 @@ import { MemoryRouter, Switch, Route, useHistory } from 'react-router-dom';
 import { ConfigProvider, message } from 'antd';
 import { PluginSDKContext } from '@projectproxima/plugin-sdk';
 
-const rootElement = '{{appName}}';
+const rootElement = '{{appKey}}';
 
 message.config({
   getContainer: () =>
@@ -44,7 +44,10 @@ const App: React.FC = props => {
 
   return (
     <PluginSDKContext.Provider value={qiankunContextValue.sdk}>
-      <ConfigProvider getPopupContainer={() => document.getElementById(rootElement)}>
+      <ConfigProvider 
+        prefixCls={process.env.appKey} 
+        getPopupContainer={() => document.getElementById(rootElement)}
+      >
         <MemoryRouter>
           <GoPropsRoute {...props} />
           <Switch>

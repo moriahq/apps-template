@@ -1,7 +1,6 @@
 import React from 'react';
 import { Input, Rate } from 'antd';
 import Error from '@/statics/error.png';
-import Logo from '@/statics/Gitee-Scan.svg';
 import cx from './Demo.less';
 import { useSDK } from '@projectproxima/plugin-sdk';
 
@@ -16,15 +15,13 @@ const Demo: React.FC = () => {
 
   return (
     <div>
-      <h2 className={cx('title')}>CSS Modules 测试</h2>
-      <Input placeholder="OSUI input 测试" />
+      <h2 className={cx('title')}>CSS Modules Test</h2>
+      <Input placeholder="Antd input test" />
       <Rate allowHalf defaultValue={2.5} />
-      <button onClick={handleClick}>唤起卡片面板</button>
+      <button onClick={handleClick}>openIssuePanel</button>
       <div>
         <img src={Error} />
       </div>
-      <div>svg测试:</div>
-      <Logo />
     </div>
   );
 };

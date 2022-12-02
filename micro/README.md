@@ -1,4 +1,4 @@
-# OSUI webpack config demo
+# App demo
 
 ### Dev
 `yarn dev`
