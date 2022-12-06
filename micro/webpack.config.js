@@ -195,9 +195,11 @@ module.exports = (_client, argv) => {
   };
 
   if (isProd) {
-    webpackConfig.externals.push({
-      ...getCommonExternals(),
-    });
+    webpackConfig.externals = [
+      {
+        ...getCommonExternals(),
+      },
+    ];
   }
 
   return webpackConfig;
