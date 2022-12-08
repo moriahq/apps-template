@@ -2,15 +2,14 @@ import React from 'react';
 import { Input, Rate } from 'antd';
 import Error from '@/statics/error.png';
 import cx from './Demo.less';
-import { useSDK } from '@projectproxima/plugin-sdk';
+import createProximaSdk from '@projectproxima/proxima-sdk-js';
 
 const Demo: React.FC = () => {
-  const sdk = useSDK();
+  const proxima = createProximaSdk();
 
+  const itemId = '1';
   const handleClick = () => {
-    sdk.sendAction('openIssuePanel', { issue: 11223 }).then(() => {
-      console.log('打开回调');
-    });
+    proxima.execute('openItemViewScreen', itemId);
   };
 
   return (
@@ -18,7 +17,7 @@ const Demo: React.FC = () => {
       <h2 className={cx('title')}>CSS Modules Test</h2>
       <Input placeholder="Antd input test" />
       <Rate allowHalf defaultValue={2.5} />
-      <button onClick={handleClick}>openIssuePanel</button>
+      <button onClick={handleClick}>openItemPanel</button>
       <div>
         <img src={Error} />
       </div>

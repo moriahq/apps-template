@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import App from './App';
-import { ProximaSDK } from '@projectproxima/plugin-sdk';
+import { ProximaSDK } from '@giteeteam/plugin-sdk';
 
 const rootElement = '#{{appKey}}';
 
