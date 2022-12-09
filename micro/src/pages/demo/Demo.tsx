@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Rate } from 'antd';
 import Error from '@/statics/error.png';
 import cx from './Demo.less';
-import createProximaSdk from '@projectproxima/proxima-sdk-js';
+import createProximaSdk from '@giteeteam/proxima-sdk-js';
 
 const Demo: React.FC = () => {
   const proxima = createProximaSdk();
