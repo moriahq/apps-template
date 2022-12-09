@@ -2,14 +2,15 @@ import React from 'react';
 import { Input, Rate } from 'antd';
 import Error from '@/statics/error.png';
 import cx from './Demo.less';
-import createProximaSdk from '@giteeteam/proxima-sdk-js';
+import { useSDK } from '@giteeteam/plugin-sdk';
 
 const Demo: React.FC = () => {
-  const proxima = createProximaSdk();
+  const sdk = useSDK();
 
-  const itemId = '1';
   const handleClick = () => {
-    proxima.execute('openItemViewScreen', itemId);
+    sdk.sendAction('openIssuePanel', { issue: 11223 }).then(() => {
+      console.info('打开回调');
+    });
   };
 
   return (
