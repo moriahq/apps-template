@@ -13,6 +13,12 @@ modules:
       resource: main
       title: Workspace Test
       loadType: Micro
+  webtrigger:
+    - key: webtrigger-key
+      function: webtrigger-function
+  function:
+    - key: webtrigger-function
+      handler: webtrigger.run
 resources:
   - key: main
     path: ./dist/

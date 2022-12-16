@@ -7,7 +7,7 @@
     "build": "webpack --mode=production",
     "dev": "yarn start",
     "start": "webpack server --mode=development",
-    "build-package": "giteeteam-apps build -o build",
+    "build-package": "giteeteam-apps build -i functions -o build",
     "build-app": "yarn build && yarn build-package",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
   },
