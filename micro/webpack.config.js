@@ -151,6 +151,10 @@ module.exports = (_client, argv) => {
     module: {
       rules: [
         {
+          test: /locales/,
+          loader: '@alienfast/i18next-loader',
+        },
+        {
           test: /\.tsx?$/,
           use: [
             {
