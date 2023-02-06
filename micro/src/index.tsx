@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import App from './App';
 import { ProximaSDK } from '@giteeteam/plugin-sdk';
+import { getMessages } from '@/lib/locale';
 
 const rootElement = '#{{appKey}}';
 
@@ -8,10 +9,13 @@ if (window.__POWERED_BY_QIANKUN__) {
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
 }
 
-function render(props) {
+async function render(props) {
+  const [locale, lngDict, antdLangPackage] = getMessages(props?.sdk?.context?.env?.LOCALES || 'zh');
+  const antdLang = await Promise.resolve(antdLangPackage);
+  const appProps = { ...props, locale, lngDict, antdLang };
   const { container } = props;
   ReactDOM.render(
-    <App {...props} />,
+    <App {...appProps} />,
     container ? container.querySelector(rootElement) : document.querySelector(rootElement),
   );
 }

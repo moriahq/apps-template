@@ -1,5 +1,5 @@
-export const run = async() => {
+export const run = async () => {
   return {
-    value: 'value'
-  }
-}
+    value: i18n.t('opensource'),
+  };
+};
