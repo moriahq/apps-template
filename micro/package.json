@@ -69,6 +69,7 @@
     "webpackbar": "^5.0.0-3"
   },
   "dependencies": {
+    "@giteeteam/apps-team-api": "^0.4.9",
     "@giteeteam/plugin-sdk": "^0.4.1",
     "antd": "^4.16.13",
     "axios": "^0.21.4",

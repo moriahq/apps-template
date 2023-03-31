@@ -153,6 +153,7 @@ module.exports = (_client, argv) => {
         {
           test: /locales/,
           loader: '@alienfast/i18next-loader',
+          include: [path.resolve(__dirname, './locales/**/*.json')],
         },
         {
           test: /\.tsx?$/,
