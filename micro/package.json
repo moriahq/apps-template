@@ -10,6 +10,8 @@
     "build-package": "giteeteam-apps build -i functions -o build -c locales",
     "build-app": "yarn build && yarn build-package",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "login-app": "giteeteam-apps login",
+    "deploy": "giteeteam-apps deploy",
     "tunnel": "giteeteam-apps tunnel -i functions -c locales"
   },
   "repository": {
