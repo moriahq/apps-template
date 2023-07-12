@@ -13,6 +13,11 @@ modules:
       resource: main
       title: Workspace Test
       loadType: Micro
+  itemPanel:
+    - key: micro-itemPanel-1
+      resource: main
+      title: ItemPanel Test
+      loadType: Micro
   webtrigger:
     - key: webtrigger-key
       function: webtrigger-function

@@ -21,7 +21,6 @@ const getCommonExternals = () => {
     antd: getCommonExternalPath('antd'),
     debug: getCommonExternalPath('debug'),
     classnames: getCommonExternalPath('classnames'),
-    lodash: getCommonExternalPath('lodash'),
   };
 };
 
