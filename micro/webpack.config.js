@@ -4,6 +4,7 @@ const hasha = require('hasha');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
@@ -127,6 +128,7 @@ module.exports = (_client, argv) => {
             },
           },
         }),
+        new OptimizeCSSAssetsPlugin(),
       ],
     },
     plugins: [
