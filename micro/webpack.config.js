@@ -99,13 +99,13 @@ module.exports = (_client, argv) => {
 
   const webpackConfig = {
     mode,
-    entry: './src/index.tsx',
+    entry: './static/index.tsx',
     output: outputConfig(isProd),
     devtool: isProd ? false : 'source-map',
     resolve: {
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.less'],
       alias: {
-        '@': path.join(__dirname, 'src/'),
+        '@': path.join(__dirname, 'static/'),
       },
     },
     devServer: {

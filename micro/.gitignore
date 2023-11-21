@@ -2,4 +2,6 @@ node_modules
 *.zip
 dist
 build
+package
+cache
 .DS_Store
