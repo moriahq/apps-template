@@ -1,4 +1,4 @@
-import { i18n } from '@giteeteam/apps-team-api';
+import { i18n } from '@giteeteam/apps-api';
 
 export const run = (): any => {
   return {

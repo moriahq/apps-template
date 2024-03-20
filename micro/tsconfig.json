@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": ["static/*"],
+      "@/*": ["src/*"],
     },
     "lib": ["dom", "dom.iterable", "esnext", "ESNext.Intl", "ES2018.Intl"],
     "allowSyntheticDefaultImports": true

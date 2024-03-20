@@ -163,7 +163,6 @@ module.exports = (_client, argv) => {
               loader: 'babel-loader',
               options: {
                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
               },
             },
             'ts-loader',

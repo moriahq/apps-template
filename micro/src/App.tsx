@@ -1,14 +1,14 @@
 import React, { useEffect, Suspense, useMemo } from 'react';
-import { MemoryRouter, Switch, Route, useHistory } from 'react-router-dom';
+import { MemoryRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { ConfigProvider, message } from 'antd';
 import { PluginSDKContext } from '@giteeteam/plugin-sdk';
+
 import I18n from '@/lib/i18n';
 
-const rootElement = '{{appKey}}';
+const rootElement = 'i18n-demo';
 
 message.config({
-  getContainer: () =>
-    document.getElementById('osc-proxima') || document.getElementById(rootElement),
+  getContainer: () => document.getElementById(rootElement),
 });
 
 import routes from './routes';
@@ -21,14 +21,23 @@ interface QiankunContextProps {
 
 export const QiankunContext = React.createContext({} as QiankunContextProps);
 
+const AppComponent = ({ component }) => {
+  const Component = component;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Component />
+    </Suspense>
+  );
+};
+
 const GoPropsRoute = props => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.info('子应用接收route:', props?.route);
     // 跳转渲染指定的路由
     if (props?.route) {
-      history.push(props?.route);
+      navigate(props?.route);
     }
   }, []);
 
@@ -36,7 +45,7 @@ const GoPropsRoute = props => {
 };
 
 const App: React.FC<{ locale: any; lngDict: any; antdLang: any }> = props => {
-  const { locale, lngDict, antdLang } = props;
+  const { lngDict, locale, antdLang } = props;
 
   const qiankunContextValue: any = useMemo(
     () => ({
@@ -55,13 +64,11 @@ const App: React.FC<{ locale: any; lngDict: any; antdLang: any }> = props => {
         >
           <MemoryRouter>
             <GoPropsRoute {...props} />
-            <Switch>
-              <Suspense fallback={<div>Loading...</div>}>
-                {routes.map(({ path, component, exact }) => (
-                  <Route path={path} component={component} exact={exact} key={path} />
-                ))}
-              </Suspense>
-            </Switch>
+            <Routes>
+              {routes.map(({ path, component }) => (
+                <Route path={path} element={<AppComponent component={component} />} key={path} />
+              ))}
+            </Routes>
           </MemoryRouter>
         </ConfigProvider>
       </PluginSDKContext.Provider>
