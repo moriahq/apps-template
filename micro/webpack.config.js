@@ -11,19 +11,6 @@ const autoprefixer = require('autoprefixer');
 const distOutputPath = 'dist';
 const appKey = '{{appKey}}';
 
-const getExternalsObjectPath = () => moduleName => ['window modules', moduleName];
-
-const getCommonExternals = () => {
-  const getCommonExternalPath = getExternalsObjectPath('common');
-  return {
-    'react-dom': getCommonExternalPath('reactDOM'),
-    react: getCommonExternalPath('react'),
-    axios: getCommonExternalPath('axios'),
-    antd: getCommonExternalPath('antd'),
-    debug: getCommonExternalPath('debug'),
-    classnames: getCommonExternalPath('classnames'),
-  };
-};
 
 // output配置
 const outputConfig = isProd =>
@@ -198,14 +185,6 @@ module.exports = (_client, argv) => {
       ],
     },
   };
-
-  if (isProd) {
-    webpackConfig.externals = [
-      {
-        ...getCommonExternals(),
-      },
-    ];
-  }
 
   return webpackConfig;
 };
