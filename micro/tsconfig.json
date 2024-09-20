@@ -23,7 +23,8 @@
   "include": [
     "static/**/*",
     "typings.d.ts",
-    "src"
+    "src",
+    "functions"
   ],
   "exclude": ["node_modules", "dist"],
 }

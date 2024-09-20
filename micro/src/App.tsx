@@ -35,7 +35,7 @@ const GoPropsRoute = props => {
   return null;
 };
 
-const App: React.FC<{ locale: any; lngDict: any; antdLang: any }> = props => {
+const App: React.FC<Record<string, any>> = props => {
   const { lngDict, locale, antdLang } = props;
 
   const qiankunContextValue: any = useMemo(

@@ -11,7 +11,6 @@ const autoprefixer = require('autoprefixer');
 const distOutputPath = 'dist';
 const appKey = '{{appKey}}';
 
-
 // output配置
 const outputConfig = isProd =>
   isProd
