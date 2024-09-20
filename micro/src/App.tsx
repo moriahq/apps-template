@@ -5,7 +5,7 @@ import { PluginSDKContext } from '@giteeteam/plugin-sdk';
 
 import I18n from '@/lib/i18n';
 
-const rootElement = 'i18n-demo';
+const rootElement = '{{appKey}}';
 
 message.config({
   getContainer: () => document.getElementById(rootElement),
@@ -20,15 +20,6 @@ interface QiankunContextProps {
 }
 
 export const QiankunContext = React.createContext({} as QiankunContextProps);
-
-const AppComponent = ({ component }) => {
-  const Component = component;
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Component />
-    </Suspense>
-  );
-};
 
 const GoPropsRoute = props => {
   const navigate = useNavigate();
@@ -65,8 +56,16 @@ const App: React.FC<{ locale: any; lngDict: any; antdLang: any }> = props => {
           <MemoryRouter>
             <GoPropsRoute {...props} />
             <Routes>
-              {routes.map(({ path, component }) => (
-                <Route path={path} element={<AppComponent component={component} />} key={path} />
+              {routes.map(({ path, Component }) => (
+                <Route
+                  path={path}
+                  element={
+                    <Suspense fallback={null}>
+                      <Component {...props} />
+                    </Suspense>
+                  }
+                  key={path}
+                />
               ))}
             </Routes>
           </MemoryRouter>

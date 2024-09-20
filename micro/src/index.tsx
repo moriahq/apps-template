@@ -3,7 +3,7 @@ import App from './App';
 import { ProximaSDK } from '@giteeteam/plugin-sdk';
 import { getMessages } from '@/lib/locale';
 
-const rootElement = '#{{appKey}}';
+const rootElement = '{{appKey}}';
 
 if (window.__POWERED_BY_QIANKUN__) {
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;

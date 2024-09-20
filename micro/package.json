@@ -67,8 +67,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@giteeteam/apps-api": "^0.4.2",
-    "@giteeteam/plugin-sdk": "^0.5.2",
+    "@giteeteam/apps-api": "^0.5.0",
+    "@giteeteam/plugin-sdk": "^0.6.9",
     "antd": "^5.15.3",
     "axios": "^1.6.8",
     "react": "18.2.0",
