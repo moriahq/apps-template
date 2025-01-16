@@ -1,17 +1,17 @@
-import React, { useEffect, Suspense, useMemo } from 'react';
-import { MemoryRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { ConfigProvider, message } from 'antd';
+import React, { Suspense, useEffect, useMemo } from 'react';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { PluginSDKContext } from '@giteeteam/plugin-sdk';
+import { ConfigProvider, message } from 'antd';
 
 import I18n from '@/lib/i18n';
+
+import routes from './routes';
 
 const rootElement = '{{appKey}}';
 
 message.config({
   getContainer: () => document.getElementById(rootElement),
 });
-
-import routes from './routes';
 
 interface QiankunContextProps {
   setGlobalState?: (data: { data: any }) => void;

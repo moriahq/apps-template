@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
-import App from './App';
 import { ProximaSDK } from '@giteeteam/plugin-sdk';
+
 import { getMessages } from '@/lib/locale';
+
+import App from './App';
 
 const rootElement = '{{appKey}}';
 

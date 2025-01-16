@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { Input, Rate } from 'antd';
-import Error from '@/statics/error.png';
-import cx from './Demo.less';
+
 import useI18n from '@/hooks/useI18n';
+import Error from '@/statics/error.png';
+
+import cx from './Demo.less';
 
 const Demo: React.FC = () => {
   const i18n = useI18n();
