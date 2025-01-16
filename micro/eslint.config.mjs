@@ -1,6 +1,6 @@
 import appsLint from '@giteeteam/apps-lint';
 
-const extraIgnores = ['lib/']
+const extraIgnores = ['build/'];
 
 export default [
   ...appsLint.map(c => {

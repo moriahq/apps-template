@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "yarn start",
-    "start": "webpack server --mode=development",
+    "start": "giteeteam-apps ui-dev -w webpack.config.js",
     "build-package": "giteeteam-apps build -i functions -o build --ui -w webpack.config.js",
     "build-app": "yarn build-package",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
