@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+    "target": "es2018",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "importHelpers": true,
     "allowJs": true,
@@ -15,16 +15,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext", "ESNext.Intl", "ES2018.Intl"],
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "static/**/*",
-    "typings.d.ts",
     "src",
+    "typings.d.ts",
     "functions"
   ],
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules", "dist", "build"]
 }
