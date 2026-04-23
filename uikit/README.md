@@ -2,11 +2,10 @@
 ### 首次开发
 将 `{{appName}}` 修改为所需。
 ### 开发
-`yarn dev`
+`pnpm dev`
 
 ### 构建
-`yarn build`
+`pnpm build`
 
 ### 插件部署
-`yarn deploy`
-
+`pnpm deploy`

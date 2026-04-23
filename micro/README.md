@@ -1,11 +1,10 @@
 # App demo
 
 ### Dev
-`yarn dev`
+`pnpm dev`
 
 ### Build
-`yarn build`
+`pnpm build-package`
 
 ### Build app
-`yarn build-app`
-
+`pnpm build-app`
